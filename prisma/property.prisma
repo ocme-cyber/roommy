@@ -1,0 +1,19 @@
+model Property {
+    id           String   @id @default(cuid())
+
+    typeOfRent   String   @map("type_of_rent")
+    type String   @map("type")
+    ownerId String @map("owner_id")
+    title        String
+    location String
+    phoneNumber String? @map("phone_number")
+    description  String   @map("description") 
+
+    images String[]
+    price        String      @map("price") 
+
+    createdAt    DateTime @default(now()) @map("created_at")
+    updatedAt    DateTime @updatedAt @map("updated_at")
+
+    @@map("property")
+}

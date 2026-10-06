@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Каталог недвижимости — Roommy</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-white text-gray-900 antialiased min-h-screen flex flex-col">
+
+    <header class="border-b border-gray-100 bg-white sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <a href="/" class="text-2xl font-bold tracking-tight text-blue-600">Roommy</a>
+            </div>
+
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-600">
+                <a href="/" class="hover:text-gray-900 transition">Главная</a>
+                <a href="/catalog" class="text-blue-600 font-semibold">Каталог</a>
+            </nav>
+
+            <div class="flex items-center gap-4">
+                <a href="/property/addProperty"
+                    class="bg-blue-600 hover:bg-blue-700 text-white font-medium text-xs px-4 py-2.5 rounded-xl transition shadow-sm">
+                    Разместить обьявление
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow">
+
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+            <div>
+                <h1 class="text-2xl font-bold tracking-tight text-gray-950">Аренда недвижимости</h1>
+                <p class="text-sm text-gray-500 mt-1">
+                    <% if (typeof rooms !=='undefined' ) { %>
+                        Найдено вариантов: <%= rooms.length %>
+                            <% } else { %>
+                                Найдено вариантов: 3
+                                <% } %>
+                </p>
+            </div>
+
+            <div class="flex items-center gap-2 self-end sm:self-auto">
+                <label for="sort"
+                    class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Сортировка:</label>
+                <select id="sort"
+                    class="bg-gray-50 border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-blue-500 transition">
+                    <option>Сначала новые</option>
+                    <option>Подешевле</option>
+                    <option>Подороже</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- <div class="grid grid-cols-1 lg:grid-cols-4 gap-8 items-start">
+
+            <aside class="lg:col-span-1 bg-white p-6 rounded-2xl border border-gray-100 shadow-sm sticky top-24">
+                <form action="/catalog" method="GET" class="space-y-6">
+                    <div class="border-b border-gray-50 pb-2">
+                        <h2 class="text-sm font-bold text-gray-950 uppercase tracking-wider">Фильтры</h2>
+                    </div>
+
+                    <div class="space-y-1.5">
+                        <label class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Где искать</label>
+                        <input type="text" name="location" placeholder="Метро, район или адрес"
+                            class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-blue-500 transition">
+                    </div>
+
+                    <div class="space-y-2">
+                        <label class="text-xs font-semibold text-gray-400 uppercase tracking-wider block">Тип
+                            аренды</label>
+                        <div class="space-y-2 text-sm text-gray-700">
+                            <label class="flex items-center gap-2.5 cursor-pointer select-none">
+                                <input type="checkbox" name="longTerm" value="true"
+                                    class="w-4 h-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500/30 accent-blue-600">
+                                <span>Долгосрочная</span>
+                            </label>
+                            <label class="flex items-center gap-2.5 cursor-pointer select-none">
+                                <input type="checkbox" name="shortTerm" value="true"
+                                    class="w-4 h-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500/30 accent-blue-600">
+                                <span>Посуточная</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="space-y-2">
+                        <label class="text-xs font-semibold text-gray-400 uppercase tracking-wider block">Тип
+                            жилья</label>
+                        <div class="space-y-2 text-sm text-gray-700">
+                            <label class="flex items-center gap-2.5 cursor-pointer select-none">
+                                <input type="checkbox" name="type" value="studio"
+                                    class="w-4 h-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500/30 accent-blue-600">
+                                <span>Студия</span>
+                            </label>
+                            <label class="flex items-center gap-2.5 cursor-pointer select-none">
+                                <input type="checkbox" name="type" value="1k"
+                                    class="w-4 h-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500/30 accent-blue-600">
+                                <span>1-комнатная</span>
+                            </label>
+                            <label class="flex items-center gap-2.5 cursor-pointer select-none">
+                                <input type="checkbox" name="type" value="2k"
+                                    class="w-4 h-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500/30 accent-blue-600">
+                                <span>2-комнатная</span>
+                            </label>
+                            <label class="flex items-center gap-2.5 cursor-pointer select-none">
+                                <input type="checkbox" name="type" value="room"
+                                    class="w-4 h-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500/30 accent-blue-600">
+                                <span>Комната</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="space-y-1.5">
+                        <label class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Бюджет (₽)</label>
+                        <div class="flex items-center gap-2">
+                            <input type="number" name="priceFrom" placeholder="От"
+                                class="w-full bg-gray-50 border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-blue-500 transition">
+                            <span class="text-gray-300">—</span>
+                            <input type="number" name="priceTo" placeholder="До"
+                                class="w-full bg-gray-50 border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-blue-500 transition">
+                        </div>
+                    </div>
+
+                    <button type="submit"
+                        class="w-full bg-gray-950 hover:bg-gray-800 text-white font-medium text-sm py-2.5 rounded-xl transition shadow-sm">
+                        Применить фильтры
+                    </button>
+                </form>
+            </aside> -->
+
+            <section class="lg:col-span-3">
+                <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+            
+            <% if (typeof rooms !=='undefined' && rooms.length> 0) { %>
+                <% rooms.forEach(room=> { %>
+                    <div
+                        class="group bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition flex flex-col justify-between">
+                        <div>
+                            <div
+                                class="aspect-video w-full bg-gray-50 relative border-b border-gray-100 flex items-center justify-center text-gray-400 text-xs overflow-hidden">
+                                <% if (room.images && room.images.length> 0) { %>
+                                    <img src="<%= room.images[0] %>" alt="<%= room.title %>"
+                                        class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                                    <% } else { %>
+                                        <span>Фотографии объекта</span>
+                                    <% } %>
+    
+                                <div class="absolute top-3 left-3 flex gap-1 flex-wrap z-10">
+                                    <% if (room.isLongTerm) { %>
+                                        <span
+                                            class="bg-blue-50/90 backdrop-blur-xs text-blue-700 text-[10px] font-bold px-2.5 py-0.5 rounded-full border border-blue-100">Долгосрочно</span>
+                                        <% } %>
+                                            <% if (room.isShortTerm) { %>
+                                                <span
+                                                    class="bg-purple-50/90 backdrop-blur-xs text-purple-700 text-[10px] font-bold px-2.5 py-0.5 rounded-full border border-purple-100">Посуточно</span>
+                                        <% } %>
+                                </div>
+                            </div>
+
+                    <div class="p-4 space-y-1">
+                        <h3 class="font-bold text-gray-900 text-sm group-hover:text-blue-600 transition truncate">
+                            <%= room.title %>
+                        </h3>
+                        <p class="text-xs text-gray-400 truncate">
+                            <%= room.location %>
+                        </p>
+                        <% if (room.description) { %>
+                            <p class="text-xs text-gray-500 line-clamp-2 pt-1">
+                                <%= room.description %>
+                            </p>
+                            <% } %>
+                    </div>
+                </div>
+
+                <div class="p-4 pt-0 border-t border-gray-50 mt-3 flex items-center justify-between">
+                    <span class="font-extrabold text-gray-950 text-base">
+                        <%= room.price.toLocaleString('ru-RU') %> ₽<span class="text-xs font-normal text-gray-400">/
+                                <%= room.isShortTerm && !room.isLongTerm ? 'сут' : 'мес' %></span>
+                    </span>
+                    <a href="/property/<%= room.id %>"
+                        class="text-xs font-semibold text-blue-600 hover:text-blue-700 transition">
+                        Подробнее &rarr;
+                    </a>
+                </div>
+            </div>
+            <% }) %>
+                <% } else { %>
+                    <div
+                        class="group bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition flex flex-col justify-between">
+                        <div>
+                            <div
+                                class="aspect-video w-full bg-gray-50 relative border-b border-gray-100 flex items-center justify-center text-gray-400 text-xs">
+                                Фотографии объекта
+                                <div class="absolute top-3 left-3 flex gap-1">
+                                    <span
+                                        class="bg-blue-50 text-blue-700 text-[10px] font-bold px-2.5 py-0.5 rounded-full border border-blue-100">Долгосрочно</span>
+                                </div>
+                            </div>
+                            <div class="p-4 space-y-1">
+                                <h3 class="font-bold text-gray-900 text-sm group-hover:text-blue-600 transition">
+                                    1-комнатная квартира, 42 м²</h3>
+                                <p class="text-xs text-gray-400">м. Аэропорт, 10 мин. пешком</p>
+                                <p class="text-xs text-gray-500 line-clamp-2 pt-1">Светлая уютная квартира с
+                                    дизайнерским ремонтом. Есть вся необходимая техника...</p>
+                            </div>
+                        </div>
+                        <div class="p-4 pt-0 border-t border-gray-50 mt-3 flex items-center justify-between">
+                            <span class="font-extrabold text-gray-950 text-base">80 000 ₽<span
+                                    class="text-xs font-normal text-gray-400">/мес</span></span>
+                            <span class="text-xs font-semibold text-blue-600">Подробнее &rarr;</span>
+                        </div>
+                    </div>
+
+                    <div
+                        class="group bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition flex flex-col justify-between">
+                        <div>
+                            <div
+                                class="aspect-video w-full bg-gray-50 relative border-b border-gray-100 flex items-center justify-center text-gray-400 text-xs">
+                                Фотографии объекта
+                                <div class="absolute top-3 left-3 flex gap-1">
+                                    <span
+                                        class="bg-purple-50 text-purple-700 text-[10px] font-bold px-2.5 py-0.5 rounded-full border border-purple-100">Посуточно</span>
+                                </div>
+                            </div>
+                            <div class="p-4 space-y-1">
+                                <h3 class="font-bold text-gray-900 text-sm group-hover:text-blue-600 transition">
+                                    Уютная студия в центре</h3>
+                                <p class="text-xs text-gray-400">м. Чистые пруды, 5 мин. пешком</p>
+                                <p class="text-xs text-gray-500 line-clamp-2 pt-1">Отличный вариант для туристов и
+                                    бизнес-поездок. Идеально чистая, бесконтактное заселение.</p>
+                            </div>
+                        </div>
+                        <div class="p-4 pt-0 border-t border-gray-50 mt-3 flex items-center justify-between">
+                            <span class="font-extrabold text-gray-950 text-base">4 500 ₽<span
+                                    class="text-xs font-normal text-gray-400">/сут</span></span>
+                            <span class="text-xs font-semibold text-blue-600">Подробнее &rarr;</span>
+                        </div>
+                    </div>
+
+                    <div
+                        class="group bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition flex flex-col justify-between">
+                        <div>
+                            <div
+                                class="aspect-video w-full bg-gray-50 relative border-b border-gray-100 flex items-center justify-center text-gray-400 text-xs">
+                                Фотографии объекта
+                                <div class="absolute top-3 left-3 flex gap-1">
+                                    <span
+                                        class="bg-blue-50 text-blue-700 text-[10px] font-bold px-2.5 py-0.5 rounded-full border border-blue-100">Долгосрочно</span>
+                                </div>
+                            </div>
+                            <div class="p-4 space-y-1">
+                                <h3 class="font-bold text-gray-900 text-sm group-hover:text-blue-600 transition">
+                                    Современная евро-двушка</h3>
+                                <p class="text-xs text-gray-400">м. Раменки, 15 мин. пешком</p>
+                                <p class="text-xs text-gray-500 line-clamp-2 pt-1">Новый дом, охраняемая территория.
+                                    Квартира сдается впервые на длительный срок.</p>
+                            </div>
+                        </div>
+                        <div class="p-4 pt-0 border-t border-gray-50 mt-3 flex items-center justify-between">
+                            <span class="font-extrabold text-gray-950 text-base">95 000 ₽<span
+                                    class="text-xs font-normal text-gray-400">/мес</span></span>
+                            <span class="text-xs font-semibold text-blue-600">Подробнее &rarr;</span>
+                        </div>
+                    </div>
+                    <% } %>
+            
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <footer class="border-t border-gray-100 bg-white py-8 mt-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-xs text-gray-400">
+            &copy; 2026 Roommy. Все права защищены.
+        </div>
+    </footer>
+
+</body>
+
+</html>

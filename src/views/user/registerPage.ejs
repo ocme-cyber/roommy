@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация в Roommy</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght=300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-900 antialiased min-h-screen flex flex-col justify-between">
+
+    <header class="p-6 max-w-7xl w-full mx-auto">
+        <a href="/" class="text-2xl font-bold tracking-tight text-blue-600 inline-block">Roommy</a>
+    </header>
+
+    <main class="flex-grow flex items-center justify-center px-4 py-8">
+        <div
+            class="bg-white p-8 sm:p-10 rounded-2xl shadow-xl shadow-gray-100/70 border border-gray-100 max-w-md w-full">
+
+            <div class="text-center mb-8">
+                <h1 class="text-2xl font-bold tracking-tight text-gray-950">Создать аккаунт</h1>
+                <p class="text-sm text-gray-500 mt-2">Присоединяйтесь к Roommy прямо сейчас</p>
+            </div>
+
+            <form class="space-y-4">
+
+                <!-- Поле: Имя -->
+                <div class="space-y-1.5">
+                    <label for="name" class="text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                        Ваше имя
+                    </label>
+                    <div class="relative">
+                        <div
+                            class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-gray-400">
+                            <!-- Иконка карточки/визитки -->
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M15 9h3.75M15 12h3.75M15 15h3.75M4.5 19.5h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Zm6-10.125a1.875 1.875 0 1 1-3.75 0 1.875 1.875 0 0 1 3.75 0Zm1.294 6.336a6.721 6.721 0 0 1-3.17.789 6.721 6.721 0 0 1-3.168-.789 3.376 3.376 0 0 1 6.338 0Z" />
+                            </svg>
+                        </div>
+                        <input type="text" id="name" name="name" required placeholder="Иван Иванов"
+                            class="w-full bg-white border border-gray-200 rounded-xl pl-11 pr-4 py-2.5 text-sm placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition">
+                    </div>
+                </div>
+
+                <!-- Поле: Логин -->
+                <div class="space-y-1.5">
+                    <label for="username" class="text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                        Логин
+                    </label>
+                    <div class="relative">
+                        <div
+                            class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-gray-400">
+                            <!-- Иконка пользователя -->
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+                            </svg>
+                        </div>
+                        <input type="text" id="login" name="login" required placeholder="ivan_cool"
+                            class="w-full bg-white border border-gray-200 rounded-xl pl-11 pr-4 py-2.5 text-sm placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition">
+                    </div>
+                </div>
+
+                <div class="space-y-1.5">
+                    <label for="password" class="text-xs font-semibold text-gray-500 uppercase tracking-wider"> Пароль </label>
+                    <div class="relative">
+                        <div
+                            class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-gray-400">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" /></svg>
+                        </div>
+                        <input type="password" id="password" name="password" required placeholder="••••••••"
+                            class="w-full bg-white border border-gray-200 rounded-xl pl-11 pr-4 py-2.5 text-sm placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition">
+                    </div>
+                </div>
+
+                <!-- Поле: Подтверждение пароля -->
+                <div class="space-y-1.5">
+                    <label for="password_confirmation"
+                        class="text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                        Подтвердите пароль
+                    </label>
+                    <div class="relative">
+                        <div
+                            class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-gray-400">
+                            <!-- Иконка щита/проверки -->
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z" />
+                            </svg>
+                        </div>
+                        <input type="password" id="password_confirmation" name="password_confirmation" required
+                            placeholder="••••••••"
+                            class="w-full bg-white border border-gray-200 rounded-xl pl-11 pr-4 py-2.5 text-sm placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition">
+                            <p id="password-error" class="hidden text-xs text-red-500 font-medium pl-1 animate-pulse">
+                                Пароли не совпадают!
+                            </p>
+                    </div>
+                </div>
+
+                <!-- Кнопка регистрации -->
+                <button type="submit" onclick="registerRequest()"
+                    class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium text-sm py-3 rounded-xl transition shadow-md shadow-blue-100 flex items-center justify-center gap-2 mt-4">
+                    Зарегистрироваться
+                </button>
+            </form>
+
+            <!-- Футер карточки -->
+            <div class="mt-6 border-t border-gray-100 pt-6 text-center">
+                <p class="text-xs text-gray-500">
+                    Уже есть аккаунт? <a href="/user/login" class="text-blue-600 font-medium hover:underline">Войти</a>
+                </p>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="p-6 text-center text-xs text-gray-400">
+        &copy; 2026 Roommy. All rights reserved.
+    </footer>
+
+</body>
+
+<script>
+
+    const passwordForm = document.getElementById('password')
+    const passwordRepeatForm = document.getElementById('password_confirmation')
+    const errorText = document.getElementById('password-error')
+    function checkPasswords() {
+        const pass = passwordForm.value;
+        const repeat = passwordRepeatForm.value;
+        if (pass.length > 0 && repeat.length > 0) {
+            if (pass !== repeat) {
+                errorText.classList.remove('hidden');
+                passwordRepeatForm.classList.add('border-red-500', 'focus:ring-red-100', 'focus:border-red-500');
+                passwordRepeatForm.classList.remove('border-gray-200', 'focus:ring-blue-100', 'focus:border-blue-500');
+            } else {
+                errorText.classList.add('hidden');
+                passwordRepeatForm.classList.remove('border-red-500', 'focus:ring-red-100', 'focus:border-red-500');
+                passwordRepeatForm.classList.add('border-gray-200', 'focus:ring-blue-100', 'focus:border-blue-500');
+            }
+        } else {
+            errorText.classList.add('hidden');
+        }
+    }
+    passwordForm.addEventListener('input', checkPasswords);
+    passwordRepeatForm.addEventListener('input', checkPasswords);
+
+    function registerRequest(event) {
+        if (event) event.preventDefault();
+
+        const usernameElement = document.getElementById("name");
+        const loginElement = document.getElementById("login");
+        const passwordElement = document.getElementById("password");
+        const passwordRepeatElement = document.getElementById("password_confirmation");
+
+        if (passwordElement.value === passwordRepeatElement.value) {
+            fetch('/user/api', {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    username: usernameElement.value,
+                    login: loginElement.value,
+                    password: passwordElement.value
+                })
+            }).then((answer) => {
+                if (answer) {
+                    document.location = "/";
+                } else {
+                    alert("Ошибка регистрации на сервере.");
+                }
+            }).catch((err) => {
+                console.error("Ошибка сети:", err);
+            });
+        }
+    }
+</script>
+</html>

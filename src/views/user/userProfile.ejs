@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Личный кабинет — Roommy</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-white text-gray-900 antialiased min-h-screen flex flex-col">
+
+    <header class="border-b border-gray-100 bg-white sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <a href="/" class="text-2xl font-bold tracking-tight text-blue-600">Roommy</a>
+            </div>
+
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-600">
+                <a href="/" class="hover:text-gray-900 transition">Главная</a>
+                <a href="/property/catalog" class="hover:text-gray-900 transition">Каталог</a>
+            </nav>
+
+            <div class="flex items-center gap-4">
+                <button onclick="userLogout()" class="text-sm font-medium text-red-500 hover:text-red-600 transition">Выйти</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10 flex-grow">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+
+            <section class="lg:col-span-4 bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
+                <div class="flex flex-col items-center text-center pb-6 border-b border-gray-100">
+                    <div
+                        class="w-24 h-24 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center font-bold text-3xl mb-4 border border-blue-100">
+                        <%= user.username ? user.username.charAt(0).toUpperCase() : user.login.charAt(0).toUpperCase()
+                            %>
+                    </div>
+                    <h2 class="text-lg font-bold text-gray-950">
+                        <%= user.username || 'Пользователь' %>
+                    </h2>
+                    <p class="text-sm text-gray-400 mt-0.5">ID: <%= user.id %>
+                    </p>
+                    <p
+                        class="text-xs bg-gray-50 text-gray-600 px-2.5 py-1 rounded-full font-medium mt-3 border border-gray-100">
+                        <%= user.login %>
+                    </p>
+                </div>
+
+            
+
+                <div class="bg-gray-50 rounded-xl p-4 flex justify-around text-center border border-gray-100">
+                    <div>
+                        <span class="block text-xl font-bold text-gray-950">1</span>
+                        <span class="text-xs text-gray-400">Объявление</span>
+                    </div>
+                    <div class="border-l border-gray-200 my-1"></div>
+                    <div>
+                        <span class="block text-xl font-bold text-gray-950">2026</span>
+                        <span class="text-xs text-gray-400">Год регистрации</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="lg:col-span-8 space-y-6">
+                <div class="flex items-center justify-between border-b border-gray-100 pb-4">
+                    <h1 class="text-xl font-bold tracking-tight text-gray-950">Мои объявления</h1>
+                    <a href="/property/addProperty"
+                        class="bg-gray-950 hover:bg-gray-800 text-white font-medium text-sm px-4 py-2 rounded-xl transition shadow-sm flex items-center gap-1.5">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                            stroke="currentColor" class="w-4 h-4">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                        </svg>
+                        Создать еще
+                    </a>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+
+                    <% myRooms.forEach(room=> { %>
+                        <div
+                            class="group border border-gray-100 bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition">
+                            <div
+                                class="aspect-video w-full bg-gray-50 relative border-b border-gray-100 flex items-center justify-center text-gray-400 text-xs overflow-hidden">
+                                <% if (room.images && room.images.length> 0) { %>
+                                    <img src="<%= room.images[0] %>" alt="<%= room.title %>"
+                                        class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                                    <% } else { %>
+                                        <span>Фотографии объекта</span>
+                                        <% } %>
+                            
+                                            <div class="absolute top-3 left-3 flex gap-1 flex-wrap z-10">
+                                                <% if (room.isLongTerm) { %>
+                                                    <span
+                                                        class="bg-blue-50/90 backdrop-blur-xs text-blue-700 text-[10px] font-bold px-2.5 py-0.5 rounded-full border border-blue-100">Долгосрочно</span>
+                                                    <% } %>
+                                                        <% if (room.isShortTerm) { %>
+                                                            <span
+                                                                class="bg-purple-50/90 backdrop-blur-xs text-purple-700 text-[10px] font-bold px-2.5 py-0.5 rounded-full border border-purple-100">Посуточно</span>
+                                                            <% } %>
+                                            </div>
+                            </div>
+                            <div class="p-4">
+                                <div class="flex justify-between items-start gap-2">
+                                    <div>
+                                        <h3
+                                            class="font-bold text-gray-900 text-sm group-hover:text-blue-600 transition">
+                                            <%= room.title %>
+                                        </h3>
+                                        <p class="text-xs text-gray-400 mt-0.5">
+                                            <%= room.location %>
+                                        </p>
+                                    </div>
+                                    <span class="font-extrabold text-gray-950 text-sm whitespace-nowrap">
+                                        <%= room.price.toLocaleString('ru-RU') %> ₽/мес
+                                    </span>
+                                </div>
+                                <div
+                                    class="mt-4 pt-3 border-t border-gray-50 flex items-center justify-between text-xs text-gray-500">
+                                    <span>Просмотров: 14</span>
+                                    <a href="#" class="text-blue-600 font-medium hover:underline">Редактировать</a>
+                                </div>
+                            </div>
+                        </div>
+                        <% }) %>
+
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <footer class="border-t border-gray-100 bg-white py-8 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-xs text-gray-400">
+            &copy; 2026 Roommy. Все права защищены.
+        </div>
+    </footer>
+
+</body>
+<script>
+    function userLogout() {
+        fetch("/user/api/logout", {
+            method: "DELETE",
+        }).then(() => {
+            document.location = "/"
+        })
+    }
+</script>
+</html>

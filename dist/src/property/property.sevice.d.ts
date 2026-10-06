@@ -1,0 +1,71 @@
+export declare const addProperty: (property: any, files: Express.Multer.File[], ownerId: number) => Promise<{
+    id: string;
+    typeOfRent: string;
+    type: string;
+    ownerId: string;
+    title: string;
+    location: string;
+    phoneNumber: string | null;
+    description: string;
+    images: string[];
+    price: string;
+    createdAt: Date;
+    updatedAt: Date;
+}>;
+export declare const getAllPropertys: () => Promise<{
+    id: string;
+    typeOfRent: string;
+    type: string;
+    ownerId: string;
+    title: string;
+    location: string;
+    phoneNumber: string | null;
+    description: string;
+    images: string[];
+    price: string;
+    createdAt: Date;
+    updatedAt: Date;
+}[]>;
+export declare const getProperty: (id: string) => Promise<{
+    id: string;
+    typeOfRent: string;
+    type: string;
+    ownerId: string;
+    title: string;
+    location: string;
+    phoneNumber: string | null;
+    description: string;
+    images: string[];
+    price: string;
+    createdAt: Date;
+    updatedAt: Date;
+} | null>;
+export declare const getRoomsOfUser: (ownerId: string) => Promise<{
+    id: string;
+    typeOfRent: string;
+    type: string;
+    ownerId: string;
+    title: string;
+    location: string;
+    phoneNumber: string | null;
+    description: string;
+    images: string[];
+    price: string;
+    createdAt: Date;
+    updatedAt: Date;
+}[]>;
+export declare const getThird: () => Promise<{
+    id: string;
+    typeOfRent: string;
+    type: string;
+    ownerId: string;
+    title: string;
+    location: string;
+    phoneNumber: string | null;
+    description: string;
+    images: string[];
+    price: string;
+    createdAt: Date;
+    updatedAt: Date;
+}[]>;
+//# sourceMappingURL=property.sevice.d.ts.map
